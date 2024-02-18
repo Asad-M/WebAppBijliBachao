@@ -16,9 +16,10 @@ namespace WebApp_E.Controllers
         // GET: Login
         public ActionResult Login()
         {
-            
+            LoginViewModel model = new LoginViewModel();
 
-            return View();
+
+            return View(model);
         }
 
 
