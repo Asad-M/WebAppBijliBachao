@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,8 +13,13 @@ namespace WebApp_E.Models
 
     public class LoginViewModel
     {
-        public string reqtype { get; set; }
+        public string reqtype { get; set; } = "login";
+        [Required]
+        [Display(Name = "Username")]
         public string user_name { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string pass_word { get; set; }
     }
 

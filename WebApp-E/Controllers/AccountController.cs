@@ -14,6 +14,7 @@ namespace WebApp_E.Controllers
     public class AccountController : Controller
     {
         // GET: Login
+        [HttpGet]
         public ActionResult Login()
         {
             LoginViewModel model = new LoginViewModel();
@@ -22,6 +23,11 @@ namespace WebApp_E.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult Login(LoginViewModel model)
+        {
+            return View();
+        }
 
 
 
