@@ -5,59 +5,13 @@
     Layout = "~/Views/Shared/_Login.cshtml";
 }
 
-@*<h2>new Login</h2>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>LoginViewModel</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.reqtype, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.reqtype, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.reqtype, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.user_name, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.pass_word, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.pass_word, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.pass_word, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
-
 @if (User.Identity.IsAuthenticated)
 {
     <div class="row justify-content-center">
         <div class="text-wrap p-4 text-center d-flex align-items-center order-md-last">
             <div class="text w-100">
                 <h2>@User.Identity.Name</h2>
-                <a href="@Url.Action("Index", "Home")" class="btn btn-white btn-outline-white mb-3">Home</a>
+                <a href="@Url.Action("Index", "Dashbaord")" class="btn btn-white btn-outline-white mb-3">Dashboard</a>
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                 {
                     @Html.AntiForgeryToken()
@@ -76,8 +30,8 @@ else
                 <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
                     <div class="text w-100">
                         <h2>Welcome to login</h2>
-                        <p>Don't have an account?</p>
-                        <a href="@Url.Action("Register", "Account")" class="btn btn-white btn-outline-white">Sign Up</a>
+                        @*<p>Don't have an account?</p>
+                        <a href="@Url.Action("Register", "Account")" class="btn btn-white btn-outline-white">Sign Up</a>*@
                     </div>
                 </div>
                 <div class="login-wrap p-4 p-lg-5">

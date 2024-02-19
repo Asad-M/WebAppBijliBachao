@@ -27,21 +27,17 @@ namespace WebApp_E.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModel model) 
         {
             try
             {
                 if (model != null)
                 {
-                    var response = GlobleVeriable.WebApiClient.PostAsJsonAsync("login", model).Result;
+                    var response = GlobleVeriable.WebApiClient.PostAsJsonAsync("Login", model).Result;
                     if (response.IsSuccessStatusCode)
                     {
                         var responseData = response.Content.ReadAsStringAsync().Result;
                         var RecivedResponseData = JsonConvert.DeserializeObject<UserInfo>(responseData);
-
-
-                        // Set authentication cookie
-                        //FormsAuthentication.SetAuthCookie(RecivedResponseData.full_name, false);
 
                         // Create authentication ticket
                         FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
@@ -58,12 +54,7 @@ namespace WebApp_E.Controllers
                         HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
                         Response.Cookies.Add(authCookie);
 
-
-
-                        if (User.Identity.IsAuthenticated)
-                        { }
-
-                        return RedirectToAction("About","Home");
+                        return RedirectToAction("Index","Dashboard");
                     }
                 }
                 
