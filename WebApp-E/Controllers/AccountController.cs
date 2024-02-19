@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebApp_E.Models;
 
 namespace WebApp_E.Controllers
@@ -24,9 +25,52 @@ namespace WebApp_E.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model)
         {
-            return View();
+            try
+            {
+                if (model != null)
+                {
+                    var response = GlobleVeriable.WebApiClient.PostAsJsonAsync("login", model).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var responseData = response.Content.ReadAsStringAsync().Result;
+                        var RecivedResponseData = JsonConvert.DeserializeObject<UserInfo>(responseData);
+
+
+                        // Set authentication cookie
+                        //FormsAuthentication.SetAuthCookie(RecivedResponseData.full_name, false);
+
+                        // Create authentication ticket
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                            1, // Version
+                            RecivedResponseData.msn, // Username to persist in ticket
+                            DateTime.Now, // Issue date
+                            DateTime.Now.AddMinutes(30), // Expiration date
+                            false, // Persistent cookie
+                            "optionalUserData" // User data (optional)
+                        );
+
+                        // Encrypt the ticket and add it to a cookie
+                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                        HttpCookie authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                        Response.Cookies.Add(authCookie);
+
+
+
+                        if (User.Identity.IsAuthenticated)
+                        { }
+
+                        return RedirectToAction("About","Home");
+                    }
+                }
+                
+
+            }
+            catch { }
+            return RedirectToAction("Login", "Account");
         }
 
 
