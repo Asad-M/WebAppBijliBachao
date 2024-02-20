@@ -10,12 +10,18 @@ namespace WebApp_E.Controllers
     {
         public ActionResult Index()
         {
+            
             return View();
         }
 
+        //[Authorize]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            if(User.Identity.IsAuthenticated)
+            {
+                ViewBag.Message = "Your application description page.";
+            }
+            
 
             return View();
         }

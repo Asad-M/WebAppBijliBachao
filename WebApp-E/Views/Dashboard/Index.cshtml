@@ -1,0 +1,692 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page-Title -->
+
+
+<div class="row">
+    <div class="col-lg-3 col-sm-3">
+        <div class="widget-panel widget-style-2 bg-white" style="height: 285px; padding:1px 35px;">
+            <h4 style="font-weight: bold;">Unit Consumed This Month</h4>
+            <div style="background-color:lightgray; border-radius:100%; height:200px; width:200px;display:flex;">
+                <p style="text-align: center; font-weight: bold; font-size: 70px; margin: 20px; padding:20px; color:black;">284</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-9 col-sm-9">
+        <div class="widget-panel widget-style-2 bg-white" style="padding: 0px 0px;">
+            @*<h4 style="font-weight: bold;" class="m-t-2">Instantaneous Voltages</h4>*@
+            <div class="row">
+                <div class="col-lg-4 col-sm-4">
+                    <figure class="highcharts-figure">
+                        <div id="Electricity"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <figure class="highcharts-figure">
+                        <div id="Heating"></div>
+                    </figure>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+                    <figure class="highcharts-figure">
+                        <div id="Water"></div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12 col-sm-12">
+        <div class="widget-panel widget-style-2 bg-white" style="height: 250px;">
+            <figure class="highcharts-figure">
+                <div id="Instantaneous_Current"></div>
+            </figure>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-3 col-sm-3">
+        <div class="widget-panel widget-style-2 bg-white" style="height: 400px; padding: 0px;">
+            <img src="graph.png" alt="" height="400">
+        </div>
+    </div>
+    <div class="col-lg-5 col-sm-5">
+        <figure class="highcharts-figure">
+            <div id="Consumptions_Trends"></div>
+        </figure>
+    </div>
+    <div class="col-lg-4 col-sm-4">
+        <figure class="highcharts-figure">
+            <div id="Generator_Stats"></div>
+        </figure>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
+    <div class="col-lg-6 col-sm-6">
+        <div class="widget-panel widget-style-2 bg-white">
+            <figure class="highcharts-figure">
+                <div id="Solar_Production"></div>
+            </figure>
+
+        </div>
+    </div>
+    <div class="col-lg-6 col-sm-6">
+        <div class="widget-panel widget-style-2 bg-white">
+            <figure class="highcharts-figure">
+                <div id="Water_Consumption"></div>
+            </figure>
+        </div>
+    </div>
+</div>
+<script>
+    Highcharts.chart('Generator_Stats', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Generator Stats'
+        },
+        xAxis: {
+            categories: [
+                'J',
+
+            ]
+        },
+        yAxis: [{
+            min: 0,
+            title: {
+                text: 'Employees'
+            }
+        }, {
+            title: {
+                text: 'Profit (millions)'
+            },
+            opposite: true
+        }],
+        legend: {
+            shadow: false
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'J',
+            color: 'rgba(83,128,79,.9)',
+            data: [140, 90, 40],
+            pointPadding: 0.4,
+            pointPlacement: -0.2
+        }, {
+            name: 'F',
+            color: 'rgba(83,128,79,.9)',
+            data: [140, 90, 40],
+            pointPadding: 0.4,
+            pointPlacement: -0.2
+        }, {
+            name: 'M',
+            color: 'rgba(83,128,79,.9)',
+            data: [140, 90, 40],
+            pointPadding: 0.4,
+            pointPlacement: -0.2
+        }, {
+            name: 'A',
+            color: 'rgba(83,128,79,.9)',
+            data: [140, 90, 40],
+            pointPadding: 0.4,
+            pointPlacement: -0.2
+        }]
+    });
+</script>
+
+<script>
+    Highcharts.chart('Consumptions_Trends', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'EConsumptions Trends'
+        },
+        xAxis: {
+            categories: [
+                'M',
+                'T',
+                'W'
+            ]
+        },
+        yAxis: [{
+            min: 0,
+            title: {
+                text: 'Employees'
+            }
+        }, {
+            title: {
+                text: 'Profit (millions)'
+            },
+            opposite: true
+        }],
+        legend: {
+            shadow: false
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Consumptions Trends',
+            color: 'rgba(61,90,150,.9)',
+            data: [140, 90, 40],
+            pointPadding: 0.4,
+            pointPlacement: -0.2
+        }]
+    });
+</script>
+
+
+
+<script>
+    Highcharts.chart('Instantaneous_Current', {
+        chart: {
+            height: 200
+
+        },
+
+        title: {
+            text: 'Instantaneous Current',
+            align: 'left'
+        },
+
+
+
+        yAxis: {
+            title: {
+                text: 'Number of Employees'
+            }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range: 2010 to 2020'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 2010
+            }
+        },
+
+        series: [{
+            name: 'Instantaneous Current',
+            data: [43934, 48656, 65165, 81827, 112143, 142383,
+                171533, 165174, 155157, 161454, 154610]
+        }
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+
+    Highcharts.chart('Electricity', {
+
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            height: '100%'
+        },
+
+        title: {
+            text: ''
+        },
+
+        pane: {
+            startAngle: -90,
+            endAngle: 89.9,
+            background: null,
+            center: ['50%', '75%'],
+            size: '50%'
+        },
+
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 100,
+            tickPixelInterval: 72,
+            tickPosition: 'inside',
+            tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
+            tickLength: 20,
+            tickWidth: 2,
+            minorTickInterval: null,
+            labels: {
+                distance: 20,
+                style: {
+                    fontSize: '14px'
+                }
+            },
+            lineWidth: 0,
+            plotBands: [{
+                from: 0,
+                to: 40,
+                color: '#55BF3B', // green
+                thickness: 20
+            }, {
+                from: 40,
+                to: 70,
+                color: '#DDDF0D', // yellow
+                thickness: 20
+            }, {
+                from: 70,
+                to: 100,
+                color: '#DF5353', // red
+                thickness: 20
+            }]
+        },
+
+        series: [{
+            name: 'Electricity',
+            data: [35],
+            tooltip: {
+                valueSuffix: ' %'
+            },
+            dataLabels: {
+                format: '{y}%',
+                borderWidth: 0,
+                color: (
+                    Highcharts.defaultOptions.title &&
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || '#333333',
+                style: {
+                    fontSize: '12px'
+                }
+            },
+            dial: {
+                radius: '80%',
+                backgroundColor: 'gray',
+                baseWidth: 12,
+                baseLength: '0%',
+                rearLength: '0%'
+            },
+            pivot: {
+                backgroundColor: 'gray',
+                radius: 6
+            }
+
+        }]
+
+    });
+
+    Highcharts.chart('Heating', {
+
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            height: '100%'
+        },
+
+        title: {
+            text: ''
+        },
+
+        pane: {
+            startAngle: -90,
+            endAngle: 89.9,
+            background: null,
+            center: ['50%', '75%'],
+            size: '50%'
+        },
+
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 100,
+            tickPixelInterval: 72,
+            tickPosition: 'inside',
+            tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
+            tickLength: 20,
+            tickWidth: 2,
+            minorTickInterval: null,
+            labels: {
+                distance: 20,
+                style: {
+                    fontSize: '14px'
+                }
+            },
+            lineWidth: 0,
+            plotBands: [{
+                from: 0,
+                to: 40,
+                color: '#55BF3B', // green
+                thickness: 20
+            }, {
+                from: 40,
+                to: 70,
+                color: '#DDDF0D', // yellow
+                thickness: 20
+            }, {
+                from: 70,
+                to: 100,
+                color: '#DF5353', // red
+                thickness: 20
+            }]
+        },
+
+        series: [{
+            name: 'Heating',
+            data: [50],
+            tooltip: {
+                valueSuffix: ' %'
+            },
+            dataLabels: {
+                format: '{y}%',
+                borderWidth: 0,
+                color: (
+                    Highcharts.defaultOptions.title &&
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || '#333333',
+                style: {
+                    fontSize: '12px'
+                }
+            },
+            dial: {
+                radius: '80%',
+                backgroundColor: 'gray',
+                baseWidth: 12,
+                baseLength: '0%',
+                rearLength: '0%'
+            },
+            pivot: {
+                backgroundColor: 'gray',
+                radius: 6
+            }
+
+        }]
+
+    });
+
+
+    Highcharts.chart('Water', {
+
+        chart: {
+            type: 'gauge',
+            plotBackgroundColor: null,
+            plotBackgroundImage: null,
+            plotBorderWidth: 0,
+            plotShadow: false,
+            height: '100%'
+        },
+
+        title: {
+            text: ''
+        },
+
+        pane: {
+            startAngle: -90,
+            endAngle: 89.9,
+            background: null,
+            center: ['50%', '75%'],
+            size: '50%'
+        },
+
+        // the value axis
+        yAxis: {
+            min: 0,
+            max: 100,
+            tickPixelInterval: 72,
+            tickPosition: 'inside',
+            tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
+            tickLength: 20,
+            tickWidth: 2,
+            minorTickInterval: null,
+            labels: {
+                distance: 20,
+                style: {
+                    fontSize: '14px'
+                }
+            },
+            lineWidth: 0,
+            plotBands: [{
+                from: 0,
+                to: 40,
+                color: '#55BF3B', // green
+                thickness: 20
+            }, {
+                from: 40,
+                to: 70,
+                color: '#DDDF0D', // yellow
+                thickness: 20
+            }, {
+                from: 70,
+                to: 100,
+                color: '#DF5353', // red
+                thickness: 20
+            }]
+        },
+
+        series: [{
+            name: 'Water',
+            data: [80],
+            tooltip: {
+                valueSuffix: ' km/h'
+            },
+            dataLabels: {
+                format: '{y}%',
+                borderWidth: 0,
+                color: (
+                    Highcharts.defaultOptions.title &&
+                    Highcharts.defaultOptions.title.style &&
+                    Highcharts.defaultOptions.title.style.color
+                ) || '#333333',
+                style: {
+                    fontSize: '12px'
+                }
+            },
+            dial: {
+                radius: '80%',
+                backgroundColor: 'gray',
+                baseWidth: 12,
+                baseLength: '0%',
+                rearLength: '0%'
+            },
+            pivot: {
+                backgroundColor: 'gray',
+                radius: 6
+            }
+
+        }]
+
+    });
+
+
+    // Add some life
+    setInterval(() => {
+        const chart = Highcharts.charts[0];
+        if (chart && !chart.renderer.forExport) {
+            const point = chart.series[0].points[0],
+                inc = Math.round((Math.random() - 0.5) * 20);
+
+            let newVal = point.y + inc;
+            if (newVal < 0 || newVal > 200) {
+                newVal = point.y - inc;
+            }
+
+            point.update(newVal);
+        }
+
+    }, 3000);
+</script>
+
+<script>
+    Highcharts.chart('Solar_Production', {
+
+        title: {
+            text: 'Solar Production',
+            align: 'left'
+        },
+
+
+
+        yAxis: {
+            title: {
+                text: 'Number of Employees'
+            }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range: 2010 to 2020'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 2010
+            }
+        },
+
+        series: [{
+            name: 'Instantaneous Current',
+            data: [43934, 48656, 65165, 81827, 112143, 142383,
+                171533, 165174, 155157, 161454, 154610]
+        }
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+</script>
+<script>
+    Highcharts.chart('Water_Consumption', {
+
+        title: {
+            text: 'Water Consumption',
+            align: 'left'
+        },
+
+
+
+        yAxis: {
+            title: {
+                text: 'Number of Employees'
+            }
+        },
+
+        xAxis: {
+            accessibility: {
+                rangeDescription: 'Range: 2010 to 2020'
+            }
+        },
+
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 2010
+            }
+        },
+
+        series: [{
+            name: 'Instantaneous Current',
+            data: [43934, 48656, 65165, 81827, 112143, 142383,
+                171533, 165174, 155157, 161454, 154610]
+        }
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });
+</script>
+
+
